@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Omniauth::Linkedin::VERSION
   s.authors     = ["Alan Skorkin"]
   s.email       = ["alan@skorks.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/skorks/omniauth-linkedin"
   s.summary     = %q{LinkedIn strategy for OmniAuth.}
   s.description = %q{LinkedIn strategy for OmniAuth.}
 
