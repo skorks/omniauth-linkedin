@@ -10,19 +10,19 @@ LinkedIn uses the OAuth 1.0a flow, you can read about it here: https://developer
 
 Usage is as per any other OmniAuth 1.0 strategy. So let's say you're using Rails, you need to add the strategy to your `Gemfile` along side omniauth:
 
-  gem 'omniauth'
-  gem 'omniauth-linkedin'
+    gem 'omniauth'
+    gem 'omniauth-linkedin'
 
 Of course if one or both of these are unreleased, you may have to pull them in directly from github e.g.:
 
-  gem 'omniauth', :git => 'https://github.com/intridea/omniauth.git'
-  gem 'omniauth-linkedin', :git => 'https://github.com/skorks/omniauth-linkedin.git'
+    gem 'omniauth', :git => 'https://github.com/intridea/omniauth.git'
+    gem 'omniauth-linkedin', :git => 'https://github.com/skorks/omniauth-linkedin.git'
 
 Once these are in, you need to add the following to your `config/initializers/omniauth.rb`:
 
-  Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :linkedin, "consumer_key", "consumer_secret" 
-  end
+    Rails.application.config.middleware.use OmniAuth::Builder do
+      provider :linkedin, "consumer_key", "consumer_secret" 
+    end
 
 You will obviously have to put in your key and secret, which you get when you register your app with LinkedIn (they call them API Key and Secret Key). 
 
@@ -34,20 +34,20 @@ You may find that you want to use OmniAuth for authentication, but you want to u
 
 Configure the LinkedIn gem with your consumer key and secret:
 
-  LinkedIn.configure do |config|
-    config.token = "consumer_key"
-    config.secret = "consumer_secret"
-  end
+    LinkedIn.configure do |config|
+      config.token = "consumer_key"
+      config.secret = "consumer_secret"
+    end
 
 Use OmniAuth as per normal to obtain an access token and an access token secret for your user. Now create the LinkedIn client and authorize it using the access token and secret that you ontained via OmniAuth:
 
-  client = LinkedIn::Client.new
-  client.authorize_from_access("access_token", "access_token_secret")
+    client = LinkedIn::Client.new
+    client.authorize_from_access("access_token", "access_token_secret")
 
 You can now make API calls as per normal e.g.:
 
-  client.profile
-  client.add_share({:comment => "blah"})
+    client.profile
+    client.add_share({:comment => "blah"})
 
 ## Note on Patches/Pull Requests
 
