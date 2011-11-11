@@ -20,6 +20,7 @@ module OmniAuth
         {
           :first_name => raw_info['firstName'],
           :last_name => raw_info['lastName'],
+          :name => "#{raw_info['firstName']} #{raw_info['lastName']}"
           :headline => raw_info['headline'],
           :image => raw_info['pictureUrl'],
           :industry => raw_info['industry'],
@@ -41,3 +42,4 @@ module OmniAuth
 end
 
 OmniAuth.config.add_camelization 'linkedin', 'LinkedIn'
+
