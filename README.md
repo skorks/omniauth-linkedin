@@ -1,8 +1,6 @@
 # OmniAuth LinkedIn
 
-**Note:** This gem is designed to work with the unreleased OmniAuth 1.0 library. It will not be officially released on RubyGems.org until OmniAuth 1.0 is released.
-
-This gem contains the LinkedIn strategy for OmniAuth.
+This gem contains the LinkedIn strategy for OmniAuth 1.0 .
 
 LinkedIn uses the OAuth 1.0a flow, you can read about it here: https://developer.linkedin.com/documents/authentication 
 
