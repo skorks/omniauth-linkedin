@@ -24,6 +24,28 @@ Once these are in, you need to add the following to your `config/initializers/om
 
 You will obviously have to put in your key and secret, which you get when you register your app with LinkedIn (they call them API Key and Secret Key). 
 
+### Additional permissions
+
+LinkedIn recently (August 2012) provided the ability to request different permissions by specifying a scope. You can find more information on the different permissions at https://developer.linkedin.com/documents/authentication
+
+By default, omniauth-linkedin requests the following permissions:
+
+    r_basicprofile+r_emailaddress
+
+This allows us to obtain enough information from LinkedIn to satisfy the requirements for the basic auth hash schema.
+
+To change the scope, simply change your initializer to something like this:
+
+    Rails.application.config.middleware.use OmniAuth::Builder do
+      provider :linkedin, "consumer_key", "consumer_secret", :scope => 'r_fullprofile+r_emailaddress', :fields => [...]
+    end
+
+The list of fields by default are:
+
+    ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location"]
+
+To see a complete list of available fields, consult the LinkedIn documentation at https://developer.linkedin.com/documents/profile-fields
+
 Now just follow the README at: https://github.com/intridea/omniauth
 
 ## Using It With The LinkedIn Gem
