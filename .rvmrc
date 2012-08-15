@@ -1,1 +1,1 @@
-rvm 1.9.2@omniauth-linkedin
+rvm --create 1.9.3@omniauth-linkedin
