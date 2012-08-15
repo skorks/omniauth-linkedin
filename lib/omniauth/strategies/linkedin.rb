@@ -12,16 +12,19 @@ module OmniAuth
         :authorize_url => 'https://www.linkedin.com/uas/oauth/authenticate'
       }
 
-      option :fields, ["id", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url"]
+      option :fields, ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location"]
+      option :scope, 'r_basicprofile+r_emailaddress'
 
       uid{ raw_info['id'] }
 
       info do
         {
+          :email => raw_info['emailAddress'],
           :first_name => raw_info['firstName'],
           :last_name => raw_info['lastName'],
           :name => "#{raw_info['firstName']} #{raw_info['lastName']}",
           :headline => raw_info['headline'],
+          :description => raw_info['headline'],
           :image => raw_info['pictureUrl'],
           :industry => raw_info['industry'],
           :urls => {
@@ -36,6 +39,12 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= MultiJson.decode(access_token.get("/v1/people/~:(#{options.fields.join(',')})?format=json").body)
+      end
+
+      def request_phase
+        options.client_options.request_token_path = "#{options.client_options.request_token_path}?scope=#{options.scope}"
+
+        super
       end
     end
   end
