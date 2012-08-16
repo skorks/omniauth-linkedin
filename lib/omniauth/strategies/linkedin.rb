@@ -13,7 +13,8 @@ module OmniAuth
       }
 
       option :fields, ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location"]
-      option :scope, 'r_basicprofile+r_emailaddress'
+
+      option :scope, 'r_basicprofile r_emailaddress'
 
       uid{ raw_info['id'] }
 
@@ -42,8 +43,8 @@ module OmniAuth
       end
 
       def request_phase
-        options.client_options.request_token_path = "#{options.client_options.request_token_path}?scope=#{options.scope}"
-
+        options.request_params ||= {}
+        options.request_params[:scope] = options.scope.gsub("+", " ")
         super
       end
     end

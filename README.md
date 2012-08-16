@@ -27,20 +27,20 @@ LinkedIn recently (August 2012) provided the ability to request different permis
 
 By default, omniauth-linkedin requests the following permissions:
 
-    r_basicprofile+r_emailaddress
+    "r_basicprofile r_emailaddress"
 
 This allows us to obtain enough information from LinkedIn to satisfy the requirements for the basic auth hash schema.
 
 To change the scope, simply change your initializer to something like this:
 
     Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :linkedin, "consumer_key", "consumer_secret", :scope => 'r_fullprofile+r_emailaddress+r_network'
+      provider :linkedin, "consumer_key", "consumer_secret", :scope => 'r_fullprofile r_emailaddress r_network'
     end
 
 One thing to note is the fact that when you ask for extra permissions, you will probably want to specify the array of fields that you want returned in the omniauth hash. If you don't then only the default fields (see below) will be returned which would defeat the purpose of asking for the extra permissions. So do the following:
 
     Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :linkedin, "consumer_key", "consumer_secret", :scope => 'r_fullprofile+r_emailaddress+r_network', :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"]
+      provider :linkedin, "consumer_key", "consumer_secret", :scope => 'r_fullprofile r_emailaddress r_network', :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"]
     end
 
 We have to repeat the list of default fields in order to get the extra 'connections' field.
