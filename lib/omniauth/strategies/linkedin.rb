@@ -28,6 +28,7 @@ module OmniAuth
           :description => raw_info['headline'],
           :image => raw_info['pictureUrl'],
           :industry => raw_info['industry'],
+          :location => [raw_info.try(:[],"location").try(:[],"name"), raw_info.try(:[],"location").try(:[],"country").try(:[],"code").try(:upcase)].compact.join(', '),
           :urls => {
             'public_profile' => raw_info['publicProfileUrl']
           }
