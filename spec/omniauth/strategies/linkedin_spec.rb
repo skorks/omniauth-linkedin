@@ -36,4 +36,24 @@ describe "OmniAuth::Strategies::LinkedIn" do
       subject.uid.should eq('123')
     end
   end
+
+  context 'returns info hash conformant with omniauth auth hash schema' do
+    before :each do
+      subject.stub(:raw_info) { {} }
+    end
+
+    context 'and therefore has all the necessary fields' do
+      it {subject.info.should have_key :name}
+      it {subject.info.should have_key :name}
+      it {subject.info.should have_key :email}
+      it {subject.info.should have_key :nickname}
+      it {subject.info.should have_key :first_name}
+      it {subject.info.should have_key :last_name}
+      it {subject.info.should have_key :location}
+      it {subject.info.should have_key :description}
+      it {subject.info.should have_key :image}
+      it {subject.info.should have_key :phone}
+      it {subject.info.should have_key :urls}
+    end
+  end
 end

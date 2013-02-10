@@ -19,14 +19,19 @@ module OmniAuth
       uid{ raw_info['id'] }
 
       info do
+        name = [raw_info['firstName'], raw_info['lastName']].compact.join(' ').strip || nil
+        name = nil_if_empty(name)
         {
+          :name => name,
           :email => raw_info['emailAddress'],
+          :nickname => name,
           :first_name => raw_info['firstName'],
           :last_name => raw_info['lastName'],
-          :name => "#{raw_info['firstName']} #{raw_info['lastName']}",
-          :headline => raw_info['headline'],
+          :location => parse_location(raw_info['location']),
           :description => raw_info['headline'],
           :image => raw_info['pictureUrl'],
+          :phone => nil,
+          :headline => raw_info['headline'],
           :industry => raw_info['industry'],
           :urls => {
             'public_profile' => raw_info['publicProfileUrl']
@@ -46,6 +51,33 @@ module OmniAuth
         options.request_params ||= {}
         options.request_params[:scope] = options.scope.gsub("+", " ")
         super
+      end
+
+      private
+
+      def parse_location(location_hash = {})
+        location_hash ||= {}
+        location_name = extract_location_name(location_hash)
+        country_code = extract_country_code(location_hash)
+        build_location_value(location_name, country_code)
+      end
+
+      def extract_location_name(location_hash = {})
+        nil_if_empty(location_hash["name"])
+      end
+
+      def extract_country_code(location_hash = {})
+        country_hash = location_hash["country"] || {}
+        country_code = nil_if_empty(country_hash["code"])
+        country_code = (country_code ? country_code.upcase : nil)
+      end
+
+      def build_location_value(location_name, country_code)
+        nil_if_empty([location_name, country_code].compact.join(', '))
+      end
+
+      def nil_if_empty(value)
+        (value.nil? || value.empty?) ? nil : value
       end
     end
   end

@@ -2,6 +2,9 @@ require 'bundler/setup'
 require 'sinatra/base'
 require 'omniauth-linkedin'
 
+ENV['LINKEDIN_CONSUMER_KEY'] = "eumx4m8w39qb"
+ENV['LINKEDIN_CONSUMER_SECRET'] = "PczJNDDLYic6kQOL"
+
 class App < Sinatra::Base
   get '/' do
     redirect '/auth/linkedin'
@@ -18,7 +21,7 @@ class App < Sinatra::Base
   end
 end
 
-use Rack::Session::Cookie
+use Rack::Session::Cookie, :secret => "change_me"
 
 use OmniAuth::Builder do
   #note that the scope is different from the default
