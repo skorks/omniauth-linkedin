@@ -33,6 +33,7 @@ module OmniAuth
           :phone => nil,
           :headline => raw_info['headline'],
           :industry => raw_info['industry'],
+          :location => [raw_info.try(:[],"location").try(:[],"name"), raw_info.try(:[],"location").try(:[],"country").try(:[],"code").try(:upcase)].compact.join(', '),
           :urls => {
             'public_profile' => raw_info['publicProfileUrl']
           }
