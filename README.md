@@ -102,7 +102,7 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
         :oauth_token_secret=>"aBc...",
         :oauth_expires_in=>"5183999",
         :oauth_authorization_expires_in=>"5183999",
-      }
+      },
       "response"=>nil #<Net::HTTPResponse>
     },
    "raw_info"=> {
