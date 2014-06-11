@@ -2,7 +2,7 @@ require "omniauth-linkedin/version"
 require 'omniauth/strategies/linkedin'
 
 
-module Omniauth
+module OmniAuth
   module Linkedin
     # Your code goes here...
   end
