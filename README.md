@@ -63,6 +63,62 @@ The list of default fields is as follows:
 
 To see a complete list of available fields, consult the LinkedIn documentation at https://developer.linkedin.com/documents/profile-fields
 
+## Example Auth Hash
+
+Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
+
+```ruby
+{
+  "provider"=>"linkedin",
+  "uid"=>"AbC123",
+  "info"=> {
+    "name"=>"John Doe",
+    "email"=>"john@doe.com",
+    "nickname"=>"John Doe",
+    "first_name"=>"John",
+    "last_name"=>"Doe",
+    "location"=>"Greater Boston Area, US",
+    "description"=>"Senior Developer, Hammertech",
+    "image"=> "http://m.c.lnkd.licdn.com/mpr/mprx/0_aBcD...",
+    "phone"=>"null",
+    "headline"=> "Senior Developer, Hammertech",
+    "industry"=>"Internet",
+    "urls"=>{
+      "public_profile"=>"http://www.linkedin.com/in/johndoe"
+    }
+  },
+  "credentials"=> {
+    "token"=>"12312...",
+    "secret"=>"aBc..."
+  },
+  "extra"=>
+  {
+    "access_token"=> {
+      "token"=>"12312...",
+      "secret"=>"aBc...",
+      "consumer"=>nil, #<OAuth::Consumer>
+      "params"=> {
+        :oauth_token=>"12312...",
+        :oauth_token_secret=>"aBc...",
+        :oauth_expires_in=>"5183999",
+        :oauth_authorization_expires_in=>"5183999",
+      },
+      "response"=>nil #<Net::HTTPResponse>
+    },
+   "raw_info"=> {
+     "firstName"=>"Joe",
+     "headline"=>"Senior Developer, Hammertech",
+     "id"=>"AbC123",
+     "industry"=>"Internet",
+     "lastName"=>"Doe",
+     "location"=> {"country"=>{"code"=>"us"}, "name"=>"Greater Boston Area"},
+     "pictureUrl"=> "http://m.c.lnkd.licdn.com/mpr/mprx/0_aBcD...",
+     "publicProfileUrl"=>"http://www.linkedin.com/in/johndoe"
+    }
+  }
+}
+```
+
 ## Using It With The LinkedIn Gem
 
 You may find that you want to use OmniAuth for authentication, but you want to use an API wrapper such as this one https://github.com/pengwynn/linkedin to actually make your api calls. But the LinkedIn gem provides it's own way to authenticate with LinkedIn via OAuth. In this case you can do the following.
