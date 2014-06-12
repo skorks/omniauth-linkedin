@@ -76,7 +76,7 @@ LinkedIn.configure do |config|
 end
 ```
 
-Use OmniAuth as per normal to obtain an access token and an access token secret for your user. Now create the LinkedIn client and authorize it using the access token and secret that you ontained via OmniAuth:
+Use OmniAuth as per normal to obtain an access token and an access token secret for your user. Now create the LinkedIn client and authorize it using the access token and secret that you obtained via OmniAuth:
 
 ```ruby
 client = LinkedIn::Client.new
