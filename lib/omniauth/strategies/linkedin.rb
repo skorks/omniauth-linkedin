@@ -44,7 +44,9 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= MultiJson.decode(access_token.get("/v1/people/~:(#{options.fields.join(',')})?format=json").body)
+        fields = options.fields
+        fields.map! { |f| f == "picture-url" ? "picture-url;secure=true" : f } if options[:secure_image_url]
+        @raw_info ||= MultiJson.decode(access_token.get("/v1/people/~:(#{fields.join(',')})?format=json").body)
       end
 
       def request_phase
