@@ -1,59 +1,57 @@
-require 'spec_helper'
-
-describe "OmniAuth::Strategies::LinkedIn" do
-  subject do
+RSpec.describe OmniAuth::Strategies::LinkedIn do
+  subject(:linkedin) do
     OmniAuth::Strategies::LinkedIn.new(nil, @options || {})
   end
 
-  it 'should add a camelization for itself' do
-    OmniAuth::Utils.camelize('linkedin').should == 'LinkedIn'
+  it 'adds a camelization for itself' do
+    expect(OmniAuth::Utils.camelize('linkedin')).to eq 'LinkedIn'
   end
 
   context 'client options' do
     it 'has correct LinkedIn site' do
-      subject.options.client_options.site.should eq('https://api.linkedin.com')
+      expect(linkedin.options.client_options.site).to eq 'https://api.linkedin.com'
     end
 
     it 'has correct request token path' do
-      subject.options.client_options.request_token_path.should eq('/uas/oauth/requestToken')
+      expect(linkedin.options.client_options.request_token_path).to eq '/uas/oauth/requestToken'
     end
 
     it 'has correct access token path' do
-      subject.options.client_options.access_token_path.should eq('/uas/oauth/accessToken')
+      expect(linkedin.options.client_options.access_token_path).to eq '/uas/oauth/accessToken'
     end
 
     it 'has correct authorize url' do
-      subject.options.client_options.authorize_url.should eq('https://www.linkedin.com/uas/oauth/authenticate')
+      expect(linkedin.options.client_options.authorize_url).to eq 'https://www.linkedin.com/uas/oauth/authenticate'
     end
   end
 
   context '#uid' do
-    before :each do
-      subject.stub(:raw_info) { { 'id' => '123' } }
+    before do
+      allow(linkedin).to receive(:raw_info).and_return('id' => '123')
     end
 
     it 'returns the id from raw_info' do
-      subject.uid.should eq('123')
+      expect(linkedin.uid).to eq '123'
     end
   end
 
   context 'returns info hash conformant with omniauth auth hash schema' do
-    before :each do
-      subject.stub(:raw_info) { {} }
+    before do
+      allow(linkedin).to receive(:raw_info).and_return({})
     end
 
     context 'and therefore has all the necessary fields' do
-      it {subject.info.should have_key :name}
-      it {subject.info.should have_key :name}
-      it {subject.info.should have_key :email}
-      it {subject.info.should have_key :nickname}
-      it {subject.info.should have_key :first_name}
-      it {subject.info.should have_key :last_name}
-      it {subject.info.should have_key :location}
-      it {subject.info.should have_key :description}
-      it {subject.info.should have_key :image}
-      it {subject.info.should have_key :phone}
-      it {subject.info.should have_key :urls}
+      it {expect(linkedin.info).to have_key :name}
+      it {expect(linkedin.info).to have_key :name}
+      it {expect(linkedin.info).to have_key :email}
+      it {expect(linkedin.info).to have_key :nickname}
+      it {expect(linkedin.info).to have_key :first_name}
+      it {expect(linkedin.info).to have_key :last_name}
+      it {expect(linkedin.info).to have_key :location}
+      it {expect(linkedin.info).to have_key :description}
+      it {expect(linkedin.info).to have_key :image}
+      it {expect(linkedin.info).to have_key :phone}
+      it {expect(linkedin.info).to have_key :urls}
     end
   end
 end
