@@ -4,7 +4,7 @@ require "omniauth-linkedin/version"
 
 Gem::Specification.new do |s|
   s.name        = "omniauth-linkedin"
-  s.version     = Omniauth::Linkedin::VERSION
+  s.version     = OmniAuth::Linkedin::VERSION
   s.authors     = ["Alan Skorkin"]
   s.email       = ["alan@skorks.com"]
   s.homepage    = "https://github.com/skorks/omniauth-linkedin"
