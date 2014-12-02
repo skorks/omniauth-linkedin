@@ -12,7 +12,7 @@ module OmniAuth
         :authorize_url => 'https://www.linkedin.com/uas/oauth/authenticate'
       }
 
-      option :fields, ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location"]
+      option :fields, ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-urls::(original)", "public-profile-url", "location"]
 
       option :scope, 'r_basicprofile r_emailaddress'
 
