@@ -121,7 +121,7 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
 
 ## Using It With The LinkedIn Gem
 
-You may find that you want to use OmniAuth for authentication, but you want to use an API wrapper such as this one https://github.com/pengwynn/linkedin to actually make your api calls. But the LinkedIn gem provides it's own way to authenticate with LinkedIn via OAuth. In this case you can do the following.
+You may find that you want to use OmniAuth for authentication, but you want to use an API wrapper such as this one https://github.com/pengwynn/linkedin to actually make your api calls. But the LinkedIn gem provides its own way to authenticate with LinkedIn via OAuth. In this case you can do the following.
 
 Configure the LinkedIn gem with your consumer key and secret:
 
